@@ -52,6 +52,11 @@ exports.createUrl = async (req, res) => {
 	try {
 		const savedUrl = await instance.save();
 
+		console.log(JSON.stringify({
+			event: 'saveUrl',
+			savedUrl
+		}, null, 2 ));
+
 		return res.send(savedUrl.dataValues);
 	}
 	catch (err) {
@@ -85,6 +90,10 @@ exports.getUrl = async (req, res) => {
 
 		return res.send({ error: 'Internal Server Error' });
 	}
+
+	console.log(JSON.stringify(
+		{ event: 'getUrl', url: req.params.url },
+	null, 2));
 
 	return res.send(results[0].dataValues);
 }
